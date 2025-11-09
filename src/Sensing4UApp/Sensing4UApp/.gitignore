@@ -1,0 +1,11 @@
+﻿# Ignore Visual Studio temporary files
+.vs/
+*.user
+*.suo
+*.vscode/
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.vsidx
