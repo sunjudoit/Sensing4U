@@ -69,6 +69,7 @@
             this.btnSaveFile.TabIndex = 1;
             this.btnSaveFile.Text = "Save File";
             this.btnSaveFile.UseVisualStyleBackColor = true;
+            this.btnSaveFile.Click += new System.EventHandler(this.btnSaveFile_Click);
             // 
             // txtLowerBound
             // 
