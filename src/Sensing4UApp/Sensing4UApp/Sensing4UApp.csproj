@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataProcessor.cs" />
+    <Compile Include="FileManager.cs" />
+    <Compile Include="SensorData.cs" />
     <Compile Include="SensorWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +66,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include=".gitignore" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

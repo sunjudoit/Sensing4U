@@ -16,5 +16,10 @@ namespace Sensing4UApp
         {
             InitializeComponent();
         }
+
+        private void btnOpenFile_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
