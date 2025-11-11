@@ -116,6 +116,7 @@
             this.btnColorize.TabIndex = 7;
             this.btnColorize.Text = "Data Indicator";
             this.btnColorize.UseVisualStyleBackColor = true;
+            this.btnColorize.Click += new System.EventHandler(this.btnColorize_Click);
             // 
             // btnSearch
             // 

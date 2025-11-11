@@ -16,7 +16,6 @@ namespace Sensing4UApp
         private readonly FileManager fileManager;
         private readonly DataProcessor dataProcessor;
         private List<SensorData> currentDataset;
-
         private readonly List<string> loadedFileNames;
 
         // Constructor: Executed when the form is created.
@@ -43,6 +42,15 @@ namespace Sensing4UApp
 
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
+
+                    //Check for duplicate files
+                    string selectedFile = fileDialog.FileName;
+                    if(loadedFileNames.Contains(selectedFile))
+                    {
+                        ShowError("This file is already loaded.");
+                        return; 
+                    }
+
                     try 
                     {
                         // Pass the file path and read the file using the LoadFile method of FileManager to get the SensorData list.
@@ -52,8 +60,8 @@ namespace Sensing4UApp
                         currentDataset = dataProcessor.GetCurrent();
                         ShowGrid(currentDataset);
 
-                        loadedFileNames.Add(fileDialog.FileName);
-                        listLoadedFiles.Items.Add(System.IO.Path.GetFileName(fileDialog.FileName));
+                        loadedFileNames.Add(fileDialog.FileName); // for checking duplicate
+                        listLoadedFiles.Items.Add(System.IO.Path.GetFileName(fileDialog.FileName)); // for the listLoadedFiles(UI)
 
 
                         ShowInfo("File loaded successfully.");
@@ -75,10 +83,10 @@ namespace Sensing4UApp
         /// </summary>
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
-            var datasetToSave = dataProcessor.GetCurrent();
+            currentDataset = dataProcessor.GetCurrent();
 
             // Stop the save operation if the current dataset is null or empty.
-            if (datasetToSave == null || datasetToSave.Count == 0)
+            if (currentDataset == null || currentDataset.Count == 0)
             {
                 ShowError("No data available to save.");
                 return;
@@ -143,6 +151,11 @@ namespace Sensing4UApp
                 currentDataset = prevDataset;
                 ShowGrid(currentDataset);
             }
+            //Select the dataset currently displayed in the loaded file list
+            if (listLoadedFiles.Items.Count > 0 && listLoadedFiles.SelectedIndex > 0) 
+            {
+                listLoadedFiles.SelectedIndex--;
+            }
 
 
         }
@@ -160,8 +173,63 @@ namespace Sensing4UApp
                 currentDataset = nextDataset;
                 ShowGrid(currentDataset);
             }
+            //Select the dataset currently displayed in the loaded file list
+            if (listLoadedFiles.Items.Count > 0 && listLoadedFiles.SelectedIndex < listLoadedFiles.Items.Count - 1)
+            {
+                listLoadedFiles.SelectedIndex++;
+            }
+
 
         }
+
+
+        /// <summary>
+        /// Read user-defined upper and lower bounds, validate input values,
+        /// Receive a list of color values,
+        /// Apply those colors to the background of a DataGridView row.
+        /// </summary>
+        private void btnColorize_Click(object sender, EventArgs e)
+        {
+            currentDataset = dataProcessor.GetCurrent();
+            if (currentDataset == null || currentDataset.Count == 0)
+            {
+                ShowError("No dataset loaded.");
+                return;
+            }
+
+            // Validate user input values          
+            if (!double.TryParse(txtLowerBound.Text, out double lower)) // If conversion of the input in the txtLowerBound text box to a double fails.
+            {
+                ShowError("Please enter a valid lower value.");
+                return;
+            }
+            if (!double.TryParse(txtUpperBound.Text, out double upper))
+            {
+                ShowError("Please enter a valid upper value.");
+                return;
+            }
+
+            if (lower > upper)
+            {
+                ShowError("The lower bound must be less than the upper bound.");
+                return;
+            }
+            // Pass the user input values ​​to DataProcessor to calculate the colors and get a color list.
+            var bounds = dataProcessor.ApplyColor(lower, upper);
+
+            // Apply background colors to the DataGridView
+            for (int i = 0; i < currentDataset.Count; i++)
+            {
+                // Set the background color for the current row based on the calculated color list.
+                dataGridView.Rows[i].DefaultCellStyle.BackColor = bounds[i];
+            }
+
+            ShowInfo("User bound applied as color successfully.");
+        }
+
+
+
+
 
 
         /// <summary>
@@ -183,6 +251,7 @@ namespace Sensing4UApp
             MessageBox.Show(message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-      
+
+       
     }
 }
