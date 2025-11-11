@@ -14,15 +14,19 @@ namespace Sensing4UApp
     public partial class SensorWindow : Form
     {
         private readonly FileManager fileManager;
-        // The dataset currently displayed in the DataGridView.
+        private readonly DataProcessor dataProcessor;
         private List<SensorData> currentDataset;
+
+        private readonly List<string> loadedFileNames;
 
         // Constructor: Executed when the form is created.
         public SensorWindow()
         {
             InitializeComponent();
             fileManager = new FileManager();
+            dataProcessor = DataProcessor.Instance;
             currentDataset = null;
+            loadedFileNames = new List<string>();
         }
         /// <summary>
         /// This is the event handler for the Open File button click.
@@ -42,9 +46,16 @@ namespace Sensing4UApp
                     try 
                     {
                         // Pass the file path and read the file using the LoadFile method of FileManager to get the SensorData list.
-                        currentDataset = fileManager.LoadFile(fileDialog.FileName);
+                        var loadedData = fileManager.LoadFile(fileDialog.FileName);
 
+                        dataProcessor.AddLoadedDataset(loadedData);
+                        currentDataset = dataProcessor.GetCurrent();
                         ShowGrid(currentDataset);
+
+                        loadedFileNames.Add(fileDialog.FileName);
+                        listLoadedFiles.Items.Add(System.IO.Path.GetFileName(fileDialog.FileName));
+
+
                         ShowInfo("File loaded successfully.");
                     }
                     catch (Exception ex)
@@ -64,6 +75,8 @@ namespace Sensing4UApp
         /// </summary>
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
+            List<SensorData> currentDataset = DataProcessor.Instance.GetCurrent();
+
             // Stop the save operation if the current dataset is null or empty.
             if (currentDataset == null || currentDataset.Count == 0)
             {
@@ -119,7 +132,29 @@ namespace Sensing4UApp
 
         }
 
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            var nextDataset = dataProcessor.Next();
 
+            if (nextDataset != null)
+            {
+                currentDataset = nextDataset;
+                ShowGrid(currentDataset);
+            }
+            
+
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            var prevDataset = dataProcessor.Prev();
+            if (prevDataset != null)
+            {
+                currentDataset = prevDataset;
+                ShowGrid(currentDataset);
+            }
+            
+        }
 
 
         /// <summary>
@@ -140,6 +175,7 @@ namespace Sensing4UApp
         {
             MessageBox.Show(message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        
+
+      
     }
 }
