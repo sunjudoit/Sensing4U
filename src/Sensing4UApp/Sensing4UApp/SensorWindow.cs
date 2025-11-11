@@ -61,7 +61,39 @@ namespace Sensing4UApp
         /// </summary>
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
+            // Stop the save operation if the current dataset is null or empty.
+            if (currentDataset == null || currentDataset.Count == 0)
+            {
+                ShowError("No data available to save.");
+                return;
+            }
 
+            // Use SaveFileDialog to allow the user to choose a save location.
+            using (SaveFileDialog fileDialog = new SaveFileDialog())
+            {
+                fileDialog.Filter = "Binary files (*.bin)|*.bin";
+
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // Call the FileManager's SaveFile method and receive the success status.
+                        bool success = fileManager.SaveFile(fileDialog.FileName, currentDataset);
+                        if (success == true)
+                        {
+                            ShowInfo("File saved successfully.");
+                        }
+                        else
+                        {
+                            ShowError("Failed to save file.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowError(ex.Message);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -70,6 +102,7 @@ namespace Sensing4UApp
         /// <param name="message">The message string to display.</param>
         private void ShowInfo(string message)
         {
+            
             MessageBox.Show(message,"Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
