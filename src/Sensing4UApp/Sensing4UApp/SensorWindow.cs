@@ -43,6 +43,9 @@ namespace Sensing4UApp
                     {
                         // Pass the file path and read the file using the LoadFile method of FileManager to get the SensorData list.
                         currentDataset = fileManager.LoadFile(fileDialog.FileName);
+
+                        ShowGrid(currentDataset);
+                        ShowInfo("File loaded successfully.");
                     }
                     catch (Exception ex)
                     {
@@ -95,6 +98,29 @@ namespace Sensing4UApp
                 }
             }
         }
+        /// <summary>
+        /// Displays the given dataset in the DataGridView as Label / Value columns.
+        /// </summary>
+        /// <param name="dataset">The list of SensorData objects to display.</param>
+        private void ShowGrid(List<SensorData> dataset)
+        {
+            if (dataset == null)
+            {
+                // If the dataset is null unbind and exit.
+                dataGridView.DataSource = null;
+                return;
+            }
+            // Clear the existing data source reference.
+            dataGridView.DataSource = null;
+            // Automatically generate columns based on object properties (labels, values).
+            dataGridView.AutoGenerateColumns = true;
+            // Bind the new list to the DataGridView for display.
+            dataGridView.DataSource = dataset;
+
+        }
+
+
+
 
         /// <summary>
         /// Shows an success information message to the user.

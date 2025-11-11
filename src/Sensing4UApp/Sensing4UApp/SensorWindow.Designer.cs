@@ -32,7 +32,7 @@
             this.btnOpenFile = new System.Windows.Forms.Button();
             this.btnSaveFile = new System.Windows.Forms.Button();
             this.txtLowerBound = new System.Windows.Forms.TextBox();
-            this.dataGridSensors = new System.Windows.Forms.DataGridView();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.txtUpperBound = new System.Windows.Forms.TextBox();
             this.txtSearchValue = new System.Windows.Forms.TextBox();
             this.txtUpdateValue = new System.Windows.Forms.TextBox();
@@ -47,7 +47,7 @@
             this.lblUpperBound = new System.Windows.Forms.Label();
             this.lblAverageResult = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridSensors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,14 +78,14 @@
             this.txtLowerBound.Size = new System.Drawing.Size(100, 21);
             this.txtLowerBound.TabIndex = 2;
             // 
-            // dataGridSensors
+            // dataGridView
             // 
-            this.dataGridSensors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridSensors.Location = new System.Drawing.Point(25, 54);
-            this.dataGridSensors.Name = "dataGridSensors";
-            this.dataGridSensors.RowTemplate.Height = 23;
-            this.dataGridSensors.Size = new System.Drawing.Size(484, 301);
-            this.dataGridSensors.TabIndex = 3;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Location = new System.Drawing.Point(25, 54);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.RowTemplate.Height = 23;
+            this.dataGridView.Size = new System.Drawing.Size(484, 301);
+            this.dataGridView.TabIndex = 3;
             // 
             // txtUpperBound
             // 
@@ -227,13 +227,13 @@
             this.Controls.Add(this.txtUpdateValue);
             this.Controls.Add(this.txtSearchValue);
             this.Controls.Add(this.txtUpperBound);
-            this.Controls.Add(this.dataGridSensors);
+            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.txtLowerBound);
             this.Controls.Add(this.btnSaveFile);
             this.Controls.Add(this.btnOpenFile);
             this.Name = "SensorWindow";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridSensors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -245,7 +245,7 @@
         private System.Windows.Forms.Button btnOpenFile;
         private System.Windows.Forms.Button btnSaveFile;
         private System.Windows.Forms.TextBox txtLowerBound;
-        private System.Windows.Forms.DataGridView dataGridSensors;
+        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.TextBox txtUpperBound;
         private System.Windows.Forms.TextBox txtSearchValue;
         private System.Windows.Forms.TextBox txtUpdateValue;
