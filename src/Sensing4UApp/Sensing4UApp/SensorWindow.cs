@@ -75,10 +75,10 @@ namespace Sensing4UApp
         /// </summary>
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
-            List<SensorData> currentDataset = DataProcessor.Instance.GetCurrent();
+            var datasetToSave = dataProcessor.GetCurrent();
 
             // Stop the save operation if the current dataset is null or empty.
-            if (currentDataset == null || currentDataset.Count == 0)
+            if (datasetToSave == null || datasetToSave.Count == 0)
             {
                 ShowError("No data available to save.");
                 return;
@@ -131,9 +131,28 @@ namespace Sensing4UApp
             dataGridView.DataSource = dataset;
 
         }
-
+        /// <summary>
+        /// Click the Previous button to view previously loaded files.
+        /// </summary>
         private void btnPrevious_Click(object sender, EventArgs e)
         {
+            // Request the previous dataset from the DataProcessor.
+            var prevDataset = dataProcessor.Prev();
+            if (prevDataset != null)
+            {
+                currentDataset = prevDataset;
+                ShowGrid(currentDataset);
+            }
+
+
+        }
+        /// <summary>
+        /// Click the next button to view next loaded files.
+        /// </summary>
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            
+            // Request the next dataset from the DataProcessor.
             var nextDataset = dataProcessor.Next();
 
             if (nextDataset != null)
@@ -141,19 +160,7 @@ namespace Sensing4UApp
                 currentDataset = nextDataset;
                 ShowGrid(currentDataset);
             }
-            
 
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            var prevDataset = dataProcessor.Prev();
-            if (prevDataset != null)
-            {
-                currentDataset = prevDataset;
-                ShowGrid(currentDataset);
-            }
-            
         }
 
 
