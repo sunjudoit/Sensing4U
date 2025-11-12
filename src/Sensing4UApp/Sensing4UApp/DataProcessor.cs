@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Data;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography;
 
 namespace Sensing4UApp
 {
@@ -93,19 +95,70 @@ namespace Sensing4UApp
             if (currentDataset == null || currentDataset.Count == 0)
                 return null;
 
-            var bounds = new List<Color>();
+            var color = new List<Color>();
 
             foreach (var data in currentDataset)
             {
                 if (data.Value > upper)
-                    bounds.Add(Color.Red);       // Value exceeds the upper limit.
+                    color.Add(Color.Red);       // Value exceeds the upper limit.
                 else if (data.Value < lower)
-                    bounds.Add(Color.Blue);      // Value is below the lower limit.
+                    color.Add(Color.Blue);      // Value is below the lower limit.
                 else
-                    bounds.Add(Color.Green);     // Value is within the user bound range.
+                    color.Add(Color.Green);     // Value is within the user bound range.
             }
 
-            return bounds;
+            return color;
         }
+        /// <summary>
+        /// Sorts the currently selected data set in ascending order by value.
+        /// </summary>
+        public void SortData()
+        {
+            var currentDataset = GetCurrent();
+            if (currentDataset == null || currentDataset.Count == 0)
+                return;
+
+ 
+            currentDataset.Sort((a, b) => a.Value.CompareTo(b.Value)); // Timsort
+        }
+    
+        /// <summary>
+        /// Performs a binary search on the sorted current dataset for the given value.
+        /// </summary>
+        /// <param name="target">The double value to search for.</param>
+        /// <returns>The index (row number) of the matching data point, or -1 if not found.</returns>
+        public int BinarySearch(double target)
+        {
+            var currentDataset = GetCurrent();
+
+            if (currentDataset == null || currentDataset.Count == 0)
+                return -1;
+
+            //Initialize the index for the search range.
+            int startPoint = 0;
+            int endPoint = currentDataset.Count()-1;
+            int midPoint = 0;
+            while (startPoint <= endPoint)
+            {
+                midPoint = (startPoint + endPoint) /2;
+                double midValue = currentDataset[midPoint].Value;
+
+                if (Math.Abs(midValue - target) < 0.001) //Comparing within a tolerance
+                {
+                    return midPoint;
+                }
+                else if (midValue < target)
+                {
+                    startPoint = midPoint + 1;
+                }
+                else
+                {
+                    endPoint = midPoint -1 ;
+                }
+            }
+
+            return -1; // Target value was not found in the dataset.
+        }
+
     }
 }

@@ -140,6 +140,7 @@ namespace Sensing4UApp
 
         }
         /// <summary>
+        /// Event handler for the Previous button Click
         /// Click the Previous button to view previously loaded files.
         /// </summary>
         private void btnPrevious_Click(object sender, EventArgs e)
@@ -160,6 +161,7 @@ namespace Sensing4UApp
 
         }
         /// <summary>
+        /// Event handler for the  Next button Click
         /// Click the next button to view next loaded files.
         /// </summary>
         private void btnNext_Click(object sender, EventArgs e)
@@ -184,6 +186,7 @@ namespace Sensing4UApp
 
 
         /// <summary>
+        /// Event handler for the Data Indicator button click
         /// Read user-defined upper and lower bounds, validate input values,
         /// Receive a list of color values,
         /// Apply those colors to the background of a DataGridView row.
@@ -215,19 +218,52 @@ namespace Sensing4UApp
                 return;
             }
             // Pass the user input values ​​to DataProcessor to calculate the colors and get a color list.
-            var bounds = dataProcessor.ApplyColor(lower, upper);
+            var color = dataProcessor.ApplyColor(lower, upper);
 
             // Apply background colors to the DataGridView
             for (int i = 0; i < currentDataset.Count; i++)
             {
                 // Set the background color for the current row based on the calculated color list.
-                dataGridView.Rows[i].DefaultCellStyle.BackColor = bounds[i];
+                dataGridView.Rows[i].DefaultCellStyle.BackColor = color[i];
             }
 
             ShowInfo("User bound applied as color successfully.");
         }
 
+        /// <summary>
+        /// Event handler for the Search button click.
+        /// Validates user input, sorts the current dataset, performs a binary search for the target value,
+        /// and highlights the search results in the DataGridView.
+        /// </summary>
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (!double.TryParse(txtSearchValue.Text, out double target)) 
+            {
+                ShowError("Please enter a valid numeric value to search.");
+                return;
+            }
+            dataProcessor.SortData(); //sort before searching
 
+            int targetPoint = dataProcessor.BinarySearch(target);
+
+            if (targetPoint != -1)
+            {
+                
+                dataGridView.ClearSelection();
+                dataGridView.Rows[targetPoint].Cells[1].Selected = true;
+                dataGridView.FirstDisplayedScrollingRowIndex = targetPoint;
+
+                ShowInfo("Search successful.");
+            }
+
+                
+        }
+
+
+        private void btnAverage_Click(object sender, EventArgs e)
+        {
+
+        }
 
 
 
@@ -250,7 +286,6 @@ namespace Sensing4UApp
         {
             MessageBox.Show(message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
 
        
     }
