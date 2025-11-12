@@ -143,7 +143,7 @@ namespace Sensing4UApp
                 midPoint = (startPoint + endPoint) /2;
                 double midValue = currentDataset[midPoint].Value;
 
-                if (Math.Abs(midValue - target) < 0.001) //Comparing within a tolerance
+                if (midValue == target)
                 {
                     return midPoint;
                 }
@@ -159,6 +159,9 @@ namespace Sensing4UApp
 
             return -1; // Target value was not found in the dataset.
         }
+
+
+
         /// <summary>
         /// Calculates the average of the 'Value' property  in the currently active dataset.
         /// </summary>

@@ -60,6 +60,10 @@ namespace Sensing4UApp
                         currentDataset = dataProcessor.GetCurrent();
                         ShowGrid(currentDataset);
 
+                        // Clear user input and result displays after showing new dataset
+                        ClearPreviousUI();
+
+
                         loadedFileNames.Add(fileDialog.FileName); // for checking duplicate
                         listLoadedFiles.Items.Add(System.IO.Path.GetFileName(fileDialog.FileName)); // for the listLoadedFiles(UI)
 
@@ -151,12 +155,15 @@ namespace Sensing4UApp
             {
                 currentDataset = prevDataset;
                 ShowGrid(currentDataset);
+
+                // Clear user input and result displays after showing new dataset
+                ClearPreviousUI();
             }
             //Select the dataset currently displayed in the loaded file list
-            if (listLoadedFiles.Items.Count > 0 && listLoadedFiles.SelectedIndex > 0) 
-            {
-                listLoadedFiles.SelectedIndex--;
-            }
+            //if (listLoadedFiles.Items.Count > 0 && listLoadedFiles.SelectedIndex > 0) 
+            //{
+            //    listLoadedFiles.SelectedIndex--;
+            //}
 
 
         }
@@ -174,12 +181,15 @@ namespace Sensing4UApp
             {
                 currentDataset = nextDataset;
                 ShowGrid(currentDataset);
+
+                // Clear user input and result displays after showing new dataset
+                ClearPreviousUI();
             }
             //Select the dataset currently displayed in the loaded file list
-            if (listLoadedFiles.Items.Count > 0 && listLoadedFiles.SelectedIndex < listLoadedFiles.Items.Count - 1)
-            {
-                listLoadedFiles.SelectedIndex++;
-            }
+            //if (listLoadedFiles.Items.Count > 0 && listLoadedFiles.SelectedIndex < listLoadedFiles.Items.Count - 1)
+            //{
+             //   listLoadedFiles.SelectedIndex++;
+            //}
 
 
         }
@@ -260,9 +270,9 @@ namespace Sensing4UApp
             {
                 ShowInfo("No matching value was found.");
             }
-
                 
         }
+
 
         /// <summary>
         /// Event handler for the Average button click.
@@ -271,6 +281,7 @@ namespace Sensing4UApp
         /// </summary>
         private void btnAverage_Click(object sender, EventArgs e)
         {
+            //ClearPreviousUI();
             double average = dataProcessor.AverageData();
 
             if (double.IsNaN(average))
@@ -282,9 +293,6 @@ namespace Sensing4UApp
 
             lblAverageResult.Text = $"{average:F3}"; // displays the result 
         }
-
-
-
 
         /// <summary>
         /// Shows an success information message to the user.
@@ -303,6 +311,40 @@ namespace Sensing4UApp
         private void ShowError(string message)
         {
             MessageBox.Show(message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
+        /// Event handler that triggers the UI cleanup when the user clicks or tabs into the search value textbox.
+        /// </summary>
+        private void txtSearchValue_Enter(object sender, EventArgs e)
+        {
+           ClearPreviousUI();
+        }
+        /// <summary>
+        /// Event handler that triggers the UI cleanup when the user clicks or tabs into the lower bound textbox.
+        /// </summary>
+        private void txtLowerBound_Enter(object sender, EventArgs e)
+        {
+            ClearPreviousUI();
+        }
+
+        /// <summary>
+        /// Resets the DataGridView's color state and clears all displayed results from the UI controls.
+        /// </summary>
+        private void ClearPreviousUI()
+        {
+            // Grid color initialization
+            dataGridView.ClearSelection();
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                row.DefaultCellStyle.BackColor = SystemColors.Window; 
+            }
+
+            // Clear all related input fields and label
+            lblAverageResult.Text = "";
+            txtSearchValue.Clear();
+            txtLowerBound.Clear();
+            txtUpperBound.Clear();
         }
 
        

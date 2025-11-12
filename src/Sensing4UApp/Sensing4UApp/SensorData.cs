@@ -33,15 +33,7 @@ namespace Sensing4UApp
             Value = value;
         }
 
-        /// <summary>
-        /// This method is used when modifying sensor readings within the DataProcessor.
-        /// </summary>
-        /// <param name="newValue">The new value to update to this sensor.</param>
-        public void SetValue(double newvalue)
-        {
-            Value = newvalue;
-
-        }
+        
     }
 
 

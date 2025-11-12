@@ -35,10 +35,8 @@
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.txtUpperBound = new System.Windows.Forms.TextBox();
             this.txtSearchValue = new System.Windows.Forms.TextBox();
-            this.txtUpdateValue = new System.Windows.Forms.TextBox();
             this.btnColorize = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnAverage = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
@@ -77,6 +75,7 @@
             this.txtLowerBound.Name = "txtLowerBound";
             this.txtLowerBound.Size = new System.Drawing.Size(100, 21);
             this.txtLowerBound.TabIndex = 2;
+            this.txtLowerBound.Enter += new System.EventHandler(this.txtLowerBound_Enter);
             // 
             // dataGridView
             // 
@@ -100,13 +99,7 @@
             this.txtSearchValue.Name = "txtSearchValue";
             this.txtSearchValue.Size = new System.Drawing.Size(103, 21);
             this.txtSearchValue.TabIndex = 5;
-            // 
-            // txtUpdateValue
-            // 
-            this.txtUpdateValue.Location = new System.Drawing.Point(556, 302);
-            this.txtUpdateValue.Name = "txtUpdateValue";
-            this.txtUpdateValue.Size = new System.Drawing.Size(104, 21);
-            this.txtUpdateValue.TabIndex = 6;
+            this.txtSearchValue.Enter += new System.EventHandler(this.txtSearchValue_Enter);
             // 
             // btnColorize
             // 
@@ -128,18 +121,9 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(668, 302);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(93, 23);
-            this.btnUpdate.TabIndex = 9;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            // 
             // btnAverage
             // 
-            this.btnAverage.Location = new System.Drawing.Point(556, 336);
+            this.btnAverage.Location = new System.Drawing.Point(558, 309);
             this.btnAverage.Name = "btnAverage";
             this.btnAverage.Size = new System.Drawing.Size(106, 26);
             this.btnAverage.TabIndex = 10;
@@ -197,7 +181,7 @@
             // lblAverageResult
             // 
             this.lblAverageResult.AutoSize = true;
-            this.lblAverageResult.Location = new System.Drawing.Point(694, 343);
+            this.lblAverageResult.Location = new System.Drawing.Point(694, 316);
             this.lblAverageResult.Name = "lblAverageResult";
             this.lblAverageResult.Size = new System.Drawing.Size(38, 12);
             this.lblAverageResult.TabIndex = 16;
@@ -226,10 +210,8 @@
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.btnAverage);
-            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnColorize);
-            this.Controls.Add(this.txtUpdateValue);
             this.Controls.Add(this.txtSearchValue);
             this.Controls.Add(this.txtUpperBound);
             this.Controls.Add(this.dataGridView);
@@ -253,10 +235,8 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.TextBox txtUpperBound;
         private System.Windows.Forms.TextBox txtSearchValue;
-        private System.Windows.Forms.TextBox txtUpdateValue;
         private System.Windows.Forms.Button btnColorize;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnAverage;
         private System.Windows.Forms.Button btnPrevious;
         private System.Windows.Forms.Button btnNext;
