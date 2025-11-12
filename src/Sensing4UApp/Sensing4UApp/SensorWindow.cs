@@ -243,26 +243,44 @@ namespace Sensing4UApp
                 return;
             }
             dataProcessor.SortData(); //sort before searching
+            // currentDataset = dataProcessor.GetCurrent(); // get currentDataset after sorting
+            //ShowGrid(currentDataset);   //Show sorted data
 
             int targetPoint = dataProcessor.BinarySearch(target);
 
             if (targetPoint != -1)
             {
-                
                 dataGridView.ClearSelection();
-                dataGridView.Rows[targetPoint].Cells[1].Selected = true;
-                dataGridView.FirstDisplayedScrollingRowIndex = targetPoint;
+                dataGridView.Rows[targetPoint].Cells[1].Selected = true; // Highlight cells with searched values
+                dataGridView.FirstDisplayedScrollingRowIndex = targetPoint; 
 
                 ShowInfo("Search successful.");
+            }
+            else 
+            {
+                ShowInfo("No matching value was found.");
             }
 
                 
         }
 
-
+        /// <summary>
+        /// Event handler for the Average button click.
+        /// It calls the DataProcessor to calculate the average of the current dataset.
+        /// displays the result, formatted to three decimal places, on the UI label.
+        /// </summary>
         private void btnAverage_Click(object sender, EventArgs e)
         {
+            double average = dataProcessor.AverageData();
 
+            if (double.IsNaN(average))
+            {
+                ShowError("No dataset loaded.");
+                lblAverageResult.Text = "";
+                return;
+            }
+
+            lblAverageResult.Text = $"{average:F3}"; // displays the result 
         }
 
 

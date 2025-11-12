@@ -159,6 +159,28 @@ namespace Sensing4UApp
 
             return -1; // Target value was not found in the dataset.
         }
+        /// <summary>
+        /// Calculates the average of the 'Value' property  in the currently active dataset.
+        /// </summary>
+        /// <returns>
+        /// The calculated average as a double, or double.NaN if the dataset is null or empty.
+        /// </returns>
+        public double AverageData()
+        {
+            var currentDataset = GetCurrent();
+
+            if (currentDataset == null || currentDataset.Count == 0)
+                return double.NaN;
+
+            int count = currentDataset.Count;
+            double sum = 0;
+            foreach (var data in currentDataset)
+            {
+                sum += data.Value;
+            }
+            return sum / count;
+
+        }
 
     }
 }
