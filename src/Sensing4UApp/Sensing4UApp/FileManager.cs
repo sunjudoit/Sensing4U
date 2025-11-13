@@ -21,13 +21,7 @@ namespace Sensing4UApp
                 // Throws an exception if the file does not exist
                 throw new FileNotFoundException("Selected file does not exist.", path);
             }
-            // Get the file extension in lowercase.
-            string extension = Path.GetExtension(path).ToLowerInvariant();
-            if (extension != ".bin")
-            {
-                // Throws an exception if it is not a .bin file
-                throw new NotSupportedException("Only .bin files are supported.");
-            }
+            
 
             List<SensorData> dataSet = new List<SensorData>();
 

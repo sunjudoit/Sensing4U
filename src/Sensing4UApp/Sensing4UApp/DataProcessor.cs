@@ -97,6 +97,7 @@ namespace Sensing4UApp
 
             var color = new List<Color>();
 
+            // 1:1 mapping between a list of data and a list of colors.
             foreach (var data in currentDataset)
             {
                 if (data.Value > upper)
@@ -119,7 +120,7 @@ namespace Sensing4UApp
                 return;
 
  
-            currentDataset.Sort((a, b) => a.Value.CompareTo(b.Value)); // Timsort
+            currentDataset.Sort((a, b) => a.Value.CompareTo(b.Value)); 
         }
     
         /// <summary>

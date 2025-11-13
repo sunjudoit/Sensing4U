@@ -38,7 +38,7 @@ namespace Sensing4UApp
             using (OpenFileDialog fileDialog = new OpenFileDialog())
             {
                 // Set the file filter (bin file only)
-                fileDialog.Filter = "Binary files (*.bin)|*.bin";
+                fileDialog.Filter = "Binary files|*.bin";
 
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -99,7 +99,7 @@ namespace Sensing4UApp
             // Use SaveFileDialog to allow the user to choose a save location.
             using (SaveFileDialog fileDialog = new SaveFileDialog())
             {
-                fileDialog.Filter = "Binary files (*.bin)|*.bin";
+                fileDialog.Filter = "Binary files|*.bin";
 
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -249,12 +249,11 @@ namespace Sensing4UApp
         {
             if (!double.TryParse(txtSearchValue.Text, out double target)) 
             {
-                ShowError("Please enter a valid numeric value to search.");
+                ShowError("Please enter a valid value to search.");
                 return;
             }
             dataProcessor.SortData(); //sort before searching
-            // currentDataset = dataProcessor.GetCurrent(); // get currentDataset after sorting
-            //ShowGrid(currentDataset);   //Show sorted data
+            
 
             int targetPoint = dataProcessor.BinarySearch(target);
 
