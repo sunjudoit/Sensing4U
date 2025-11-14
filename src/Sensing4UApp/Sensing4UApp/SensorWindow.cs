@@ -196,10 +196,10 @@ namespace Sensing4UApp
 
 
         /// <summary>
-        /// Event handler for the Data Indicator button click
-        /// Read user-defined upper and lower bounds, validate input values,
-        /// Receive a list of color values,
-        /// Apply those colors to the background of a DataGridView row.
+        /// Event handler for the Data Indicator button click.
+        /// Reads user-defined upper and lower bounds, validates input values,
+        /// receives a 2D array of colors,
+        /// and applies those colors to the background of each DataGridView row.
         /// </summary>
         private void btnColorize_Click(object sender, EventArgs e)
         {
@@ -227,7 +227,7 @@ namespace Sensing4UApp
                 ShowError("The lower bound must be less than the upper bound.");
                 return;
             }
-            // Pass the user input values ​​to DataProcessor to calculate the colors and get a color list.
+            // Pass the bounds to DataProcessor to calculate the colors and get a 2D color map.
             var color = dataProcessor.ApplyColor(lower, upper);
 
             // Apply background colors to the DataGridView

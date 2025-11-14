@@ -28,12 +28,10 @@ namespace Sensing4UApp
             using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
             using (BinaryReader br = new BinaryReader(fs))
             {         
-                // Read all double values in sequence until the end of the file.
+                
                 while (fs.Position < fs.Length)
                 {
 
-                    //int strLen = br.ReadInt32();
-                    //string label = Encoding.UTF8.GetString(br.ReadBytes(strLen));
                     string label = br.ReadString();
                     double value = br.ReadDouble();
 
@@ -47,7 +45,7 @@ namespace Sensing4UApp
 
         /// <summary>
         /// Saves the provided list of SensorData into a binary (.bin) file.
-        /// Only the Value property is written sequentially as double values.
+        /// Each record is written as a Label (string) followed by Value (double).
         /// </summary>
         /// <param name="path">The destination file path.</param>
         /// <param name="data">The list of SensorData objects to save.</param>
