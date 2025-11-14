@@ -233,8 +233,8 @@ namespace Sensing4UApp
             // Apply background colors to the DataGridView
             for (int i = 0; i < currentDataset.Count; i++)
             {
-                // Set the background color for the current row based on the calculated color list.
-                dataGridView.Rows[i].DefaultCellStyle.BackColor = color[i];
+                // Set the background color .
+                dataGridView.Rows[i].DefaultCellStyle.BackColor = color[i,0];
             }
 
             ShowInfo("User bound applied as color successfully.");

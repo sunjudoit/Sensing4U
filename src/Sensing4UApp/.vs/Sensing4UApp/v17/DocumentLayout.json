@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,13 +42,26 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FileManager.cs",
+              "DocumentMoniker": "D:\\TAFE\\Programming Diploma1\\C#2\\AT1\\Sensing4U\\src\\Sensing4UApp\\Sensing4UApp\\FileManager.cs",
+              "RelativeDocumentMoniker": "Sensing4UApp\\FileManager.cs",
+              "ToolTip": "D:\\TAFE\\Programming Diploma1\\C#2\\AT1\\Sensing4U\\src\\Sensing4UApp\\Sensing4UApp\\FileManager.cs",
+              "RelativeToolTip": "Sensing4UApp\\FileManager.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAACQAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T16:19:37.013Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "SensorWindow.cs",
               "DocumentMoniker": "D:\\TAFE\\Programming Diploma1\\C#2\\AT1\\Sensing4U\\src\\Sensing4UApp\\Sensing4UApp\\SensorWindow.cs",
               "RelativeDocumentMoniker": "Sensing4UApp\\SensorWindow.cs",
               "ToolTip": "D:\\TAFE\\Programming Diploma1\\C#2\\AT1\\Sensing4U\\src\\Sensing4UApp\\Sensing4UApp\\SensorWindow.cs",
               "RelativeToolTip": "Sensing4UApp\\SensorWindow.cs",
-              "ViewState": "AQIAAPQAAAAAAAAAAAAAAAUBAAANAAAA",
+              "ViewState": "AQIAANYAAAAAAAAAAAAAAOoAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-09T16:06:46.439Z",
               "EditorCaption": ""
@@ -61,22 +74,9 @@
               "RelativeDocumentMoniker": "Sensing4UApp\\DataProcessor.cs",
               "ToolTip": "D:\\TAFE\\Programming Diploma1\\C#2\\AT1\\Sensing4U\\src\\Sensing4UApp\\Sensing4UApp\\DataProcessor.cs",
               "RelativeToolTip": "Sensing4UApp\\DataProcessor.cs",
-              "ViewState": "AQIAAGUAAAAAAAAAAAAuwHoAAABHAAAA",
+              "ViewState": "AQIAAFcAAAAAAAAAAAAmwHUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-09T16:20:05.933Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FileManager.cs",
-              "DocumentMoniker": "D:\\TAFE\\Programming Diploma1\\C#2\\AT1\\Sensing4U\\src\\Sensing4UApp\\Sensing4UApp\\FileManager.cs",
-              "RelativeDocumentMoniker": "Sensing4UApp\\FileManager.cs",
-              "ToolTip": "D:\\TAFE\\Programming Diploma1\\C#2\\AT1\\Sensing4U\\src\\Sensing4UApp\\Sensing4UApp\\FileManager.cs",
-              "RelativeToolTip": "Sensing4UApp\\FileManager.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T16:19:37.013Z",
               "EditorCaption": ""
             },
             {

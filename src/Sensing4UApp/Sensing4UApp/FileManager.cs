@@ -22,28 +22,23 @@ namespace Sensing4UApp
                 throw new FileNotFoundException("Selected file does not exist.", path);
             }
             
-
             List<SensorData> dataSet = new List<SensorData>();
-
-            // get the label prefix from the file name. 
-            string baseLabel = Path.GetFileNameWithoutExtension(path);
 
             // Open the file using FileStream and BinaryReader.
             using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
             using (BinaryReader br = new BinaryReader(fs))
-            {
-                int index = 1;
-
+            {         
                 // Read all double values in sequence until the end of the file.
                 while (fs.Position < fs.Length)
-                { 
+                {
+
+                    //int strLen = br.ReadInt32();
+                    //string label = Encoding.UTF8.GetString(br.ReadBytes(strLen));
+                    string label = br.ReadString();
                     double value = br.ReadDouble();
 
-                    // Generate the label by combining the prefix of file name and the sequence number.
-                    string label = $"{baseLabel}_{index}";
-
                     dataSet.Add(new SensorData(label, value));
-                    index++;
+                   
 
                 }
             }
@@ -68,6 +63,7 @@ namespace Sensing4UApp
                     // Iterate over every SensorData object in the data list.
                     foreach (SensorData dataItem in data)
                     {
+                        bw.Write(dataItem.Label);
                         bw.Write(dataItem.Value);
                     }
                 }

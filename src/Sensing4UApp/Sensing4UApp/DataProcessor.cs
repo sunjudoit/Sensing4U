@@ -81,13 +81,16 @@ namespace Sensing4UApp
         }
 
         /// <summary>
-        /// Analyzes the values ​​in the current dataset using the user-entered upper and lower bounds.
-        /// Returns a list of colors (Red, Blue, or Green) corresponding to each data point.
+        /// Analyzes the values in the current dataset using the user-entered upper and lower bounds.
+        /// Returns a 2D array of colors  corresponding to each data point.
         /// </summary>
         /// <param name="lower">The lower bound.</param>
         /// <param name="upper">The upper bound.</param>
-        /// <returns>A pointer to a List<Color> object, or null if the dataset is empty.</returns>
-        public List<Color> ApplyColor(double lower, double upper)
+        /// <returns>
+        /// A Color[,] 2D array where each row represents a data point and the single column
+        /// contains the mapped color, or null if the dataset is empty.
+        /// </returns>
+        public Color[,] ApplyColor(double lower, double upper)
         {
             var currentDataset = GetCurrent();
 
@@ -95,17 +98,22 @@ namespace Sensing4UApp
             if (currentDataset == null || currentDataset.Count == 0)
                 return null;
 
-            var color = new List<Color>();
+            int rowCount = currentDataset.Count;
+            int colCount = 1;
 
-            // 1:1 mapping between a list of data and a list of colors.
-            foreach (var data in currentDataset)
+            Color[,] color = new Color[rowCount, colCount];
+
+            // 1:1 mapping between a list of data and a 2D array of colors.
+           for (int i = 0; i < rowCount; i++)
             {
-                if (data.Value > upper)
-                    color.Add(Color.Red);       // Value exceeds the upper limit.
-                else if (data.Value < lower)
-                    color.Add(Color.Blue);      // Value is below the lower limit.
+                double value = currentDataset[i].Value;
+
+                if (value > upper)
+                    color[i, 0] = Color.Red;
+                else if (value < lower)
+                    color[i, 0] = Color.Blue;
                 else
-                    color.Add(Color.Green);     // Value is within the user bound range.
+                    color[i, 0] = Color.Green;  
             }
 
             return color;
