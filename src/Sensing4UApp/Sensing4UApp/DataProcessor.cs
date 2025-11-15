@@ -51,20 +51,7 @@ namespace Sensing4UApp
             return DatasetCollection[currentIndex];
 
         }
-        /// <summary>
-        /// Moves the currentIndex to the next dataset in the collection, if available.
-        /// </summary>
-        /// <returns>The next List<SensorData> or the current one if already at the end.</returns>
-        public List<SensorData> Next()
-        {
-            if (DatasetCollection.Count == 0)
-                return null;
-            
-            if (currentIndex < DatasetCollection.Count - 1) //if it's not pointing to the last item.
-                currentIndex++;
 
-            return DatasetCollection[currentIndex];
-        }
         /// <summary>
         /// Moves the currentIndex to the previous dataset in the collection, if available.
         /// </summary>
@@ -79,6 +66,22 @@ namespace Sensing4UApp
 
             return DatasetCollection[currentIndex];
         }
+
+        /// <summary>
+        /// Moves the currentIndex to the next dataset in the collection, if available.
+        /// </summary>
+        /// <returns>The next List<SensorData> or the current one if already at the end.</returns>
+        public List<SensorData> Next()
+        {
+            if (DatasetCollection.Count == 0)
+                return null;
+            
+            if (currentIndex < DatasetCollection.Count - 1) //if it's not pointing to the last item.
+                currentIndex++;
+
+            return DatasetCollection[currentIndex];
+        }
+        
 
         /// <summary>
         /// Analyzes the values in the current dataset using the user-entered upper and lower bounds.
@@ -190,6 +193,7 @@ namespace Sensing4UApp
             {
                 sum += data.Value;
             }
+
             return sum / count;
 
         }
